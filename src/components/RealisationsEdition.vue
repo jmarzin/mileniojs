@@ -1,13 +1,13 @@
 <template>
-    <div id="panneaux-accueil-edition">
+    <div id="realisations-edition">
         Fonction non disponible !
     </div>
 </template>
 
 <script>
     export default {
-        name: "panneauxaccueiledition",
-        props: ['donneesPanneaux'],
+        name: "realisationsedition",
+        props: ['donneesRealisations'],
         data() {
             return {
             }

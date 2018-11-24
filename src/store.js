@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    admin: true,
+      apihttp: "http://localhost:3000"
   },
   mutations: {
 
