@@ -64,7 +64,7 @@
                 this.viewMode = true;
             },
             lecture() {
-                litRealisations()
+                litRealisations(this.$route.name + 's')
                     .then (res => {
                         let index = parseInt(this.$route.params.id);
                         if(index >=0 && index < res.length && res[index].affiche) {

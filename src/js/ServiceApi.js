@@ -1,4 +1,5 @@
 import * as axios from 'axios';
+import urlGoogleMail from './urlGoogleMail';
 
 const BASE_URL = 'http://localhost:3000';
 const LOGIN = {username: 'admin', password: '51julie2'};
@@ -53,7 +54,7 @@ function getContactAccueil() {
         "\"}");
     let p2 = axios({
         method: 'post',
-        url: "https://www.googleapis.com/calendar/v3/freeBusy?fields=calendars%2Cgroups%2Ckind%2CtimeMax%2CtimeMin&key=AIzaSyCvvurPk_6StASYk_eNeXj3sWYOhx6pYm4",
+        url: urlGoogleMail,
         data: json_request,
     });
     return Promise.all([p1, p2])
@@ -81,8 +82,8 @@ function contact(donnees) {
 
 }
 
-function litRealisations() {
-    return axios.get(`${BASE_URL}/realisations`)
+function litRealisations(routeName) {
+    return axios.get(`${BASE_URL}/${routeName}`)
         .then(res => res.data)
 }
 

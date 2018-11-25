@@ -1,6 +1,6 @@
 <template>
     <div id="realisations-pagination">
-        <RealisationsAffichage v-bind:donneesRealisations=tranche></RealisationsAffichage>
+        <RealisationsAffichage v-bind:donneesRealisations=tranche :ensemble="ensemble"></RealisationsAffichage>
         <b-pagination-nav v-if="donneesRealisations.length > nbpp" align="center" base-url="#" :number-of-pages=numberOfPages :value="currentPage"/>
     </div>
 </template>
@@ -11,6 +11,7 @@
         name: "realisationspagination",
         props: {
             donneesRealisations: Array[Object],
+            ensemble : String,
             nbpp: [Number, String]
         },
         components: {

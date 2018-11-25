@@ -18,6 +18,11 @@ export default new Router({
             component: () => import('@/components/Realisations.vue')
         },
         {
+            path: '/cuisines',
+            name: 'cuisines',
+            component: () => import('@/components/Realisations.vue')
+        },
+        {
             path: '/realisation/:id',
             name: 'realisation',
             component: () => import('@/components/Realisation.vue')

@@ -12,7 +12,7 @@
                         <b-nav-item to="/" v-bind:class="{ active: $route.path === '/' }">Accueil</b-nav-item>
                         <b-nav-item href="#" v-bind:class="{ active: $route.path.indexOf('actualites') > 0 }">Actualités</b-nav-item>
                         <b-nav-item-dropdown v-bind:class="{ active: $route.path.indexOf('services') > 0 }" text="Services" right>
-                            <b-dropdown-item href="#" v-bind:class="{ active: $route.path.indexOf('cuisines') > 0 }">Cuisines</b-dropdown-item>
+                            <b-dropdown-item to='/cuisines' v-bind:class="{ active: $route.path.indexOf('cuisines') > 0 }">Cuisines</b-dropdown-item>
                             <b-dropdown-item href="#" v-bind:class="{ active: $route.path.indexOf('sallesdebain') > 0 }">Salles de bain</b-dropdown-item>
                             <b-dropdown-item href="#" v-bind:class="{ active: $route.path.indexOf('rangements') > 0}">Rangements</b-dropdown-item>
                         </b-nav-item-dropdown>

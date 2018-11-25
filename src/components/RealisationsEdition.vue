@@ -7,7 +7,7 @@
 <script>
     export default {
         name: "realisationsedition",
-        props: ['donneesRealisations'],
+        props: ['donneesRealisations', 'ensemble'],
         data() {
             return {
             }

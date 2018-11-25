@@ -26,7 +26,7 @@
     import {toHttp} from '@/js/ServiceApi';
     export default {
         name: "realisationsaffichage",
-        props: ['donneesRealisations'],
+        props: ['donneesRealisations', 'ensemble'],
         methods: {
             adresse: function(rep, photos) {
                 return toHttp(rep, photos)
