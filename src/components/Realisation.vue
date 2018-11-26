@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Réalisation</h1>
+                    <h1 class="page-header">{{ items[2].text }}</h1>
                     <b-breadcrumb :items="items"/>
                     <b-button v-if="admin" :variant="'link'" v-on:click="enterEditMode">
                         <font-awesome-icon icon="pen"></font-awesome-icon>
@@ -32,11 +32,11 @@
                         to: "/",
                     },
                     {
-                        text: 'Réalisations',
+                        text: '',
                         to: '/realisations'
                     },
                     {
-                        text: 'Réalisation',
+                        text: '',
                         active: true
                     }
                 ],
@@ -86,6 +86,13 @@
             ])
         },
         mounted() {
+            if(this.$route.name === 'realisation') {
+                this.items[1].text = 'Réalisations';
+                this.items[2].text = 'Réalisation';
+            } else {
+                this.items[1].text = 'Cuisines';
+                this.items[2].text = 'Cuisine';
+            }
             this.lecture();
         }
     }

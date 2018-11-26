@@ -9,11 +9,11 @@
                             :img-src="adresse(item.repertoire, item.photos)"
                             img-alt="Photo"
                             class="mb-2 img-responsive img-hover img-related pointer"
-                            @click="$router.push(`/realisation/${index}`)">
+                            @click="$router.push(`/${element}/${index}`)">
                         <p class="card-text">
                             {{item.sous_titre}}
                         </p>
-                        <b-link to="`/realisation/${index}`"
+                        <b-link to="`/${element}/${index}`"
                                 class="card-link">En savoir plus</b-link>
                     </b-card>
                 </b-card-group>
@@ -30,6 +30,15 @@
         methods: {
             adresse: function(rep, photos) {
                 return toHttp(rep, photos)
+            }
+        },
+        computed: {
+            element: function() {
+                if(this.ensemble === 'Réalisations') {
+                    return 'realisation'
+                } else {
+                    return 'cuisine'
+                }
             }
         }
     }

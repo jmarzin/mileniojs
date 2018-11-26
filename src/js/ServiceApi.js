@@ -1,5 +1,5 @@
 import * as axios from 'axios';
-import urlGoogleMail from './urlGoogleMail'; 
+import {urlGoogleMail} from './urlGoogleMail';
 
 const BASE_URL = 'http://localhost:3000';
 const LOGIN = {username: 'admin', password: '51julie2'};

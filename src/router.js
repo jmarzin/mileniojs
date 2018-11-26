@@ -28,6 +28,11 @@ export default new Router({
             component: () => import('@/components/Realisation.vue')
         },
         {
+            path: '/cuisine/:id',
+            name: 'cuisine',
+            component: () => import('@/components/Realisation.vue')
+        },
+        {
             path: '/about',
             name: 'about',
             // route level code-splitting
