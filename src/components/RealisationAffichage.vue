@@ -13,13 +13,13 @@
             </div>
             <div class="col-md-4" v-html="donneesRealisation.texte"></div>
         </div>
-        <div class="row" v-if="donneesRealisation.repertoires_lies">
+        <div class="row" v-if="donneesRealisation.repertoires_lies.length > 0">
             <div class="col-lg-12">
                 <h3 class="page-header">Items voisins</h3>
             </div>
             <hr>
             <div class="col-sm-3 col-xs-6" v-for="(lie, idx) in donneesRealisation.repertoires_lies" :key="idx">
-                <router-link :to="{ name: 'realisation', params: { id: lienVers(lie) }}">
+                <router-link :to="{ name: $route.name, params: { id: lienVers(lie) }}">
                     <img class="img-responsive img-fluid img-hover img-related"
                          :src="adresse(lie)"
                          alt="">

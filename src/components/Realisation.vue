@@ -33,7 +33,7 @@
                     },
                     {
                         text: '',
-                        to: '/realisations'
+                        to: ''
                     },
                     {
                         text: '',
@@ -64,7 +64,8 @@
                 this.viewMode = true;
             },
             lecture() {
-                litRealisations(this.$route.name + 's')
+                let arg = this.$route.name === 'salle_de_bain' ? 'salles_de_bain' : this.$route.name + 's';
+                litRealisations(arg)
                     .then (res => {
                         let index = parseInt(this.$route.params.id);
                         if(index >=0 && index < res.length && res[index].affiche) {
@@ -88,10 +89,20 @@
         mounted() {
             if(this.$route.name === 'realisation') {
                 this.items[1].text = 'Réalisations';
+                this.items[1].to = '/realisations';
                 this.items[2].text = 'Réalisation';
-            } else {
+            } else if(this.$route.name === 'cuisine') {
                 this.items[1].text = 'Cuisines';
+                this.items[1].to = '/cuisines';
                 this.items[2].text = 'Cuisine';
+            } else if(this.$route.name === 'rangement') {
+                this.items[1].text = 'Rangements';
+                this.items[1].to = '/rangements';
+                this.items[2].text = 'Rangement';
+            } else {
+                this.items[1].text = 'Salles de bain';
+                this.items[1].to = '/salles_de_bain';
+                this.items[2].text = 'Salle de bain';
             }
             this.lecture();
         }

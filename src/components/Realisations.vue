@@ -77,14 +77,19 @@
                     return "Réalisations"
                 } else if(this.$route.name === "cuisines") {
                     return "Cuisines"
+                } else if(this.$route.name === "rangements") {
+                    return "Rangements"
                 } else {
-                    return ""
+                    return "Salles de bains"
                 }
             }
         },
         mounted() {
+             this.items[1].text = this.ensemble;
+             this.lecture();
+        },
+        updated() {
             this.items[1].text = this.ensemble;
-            this.lecture();
         }
     }
 </script>

@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 import {urlGoogleMail} from './urlGoogleMail';
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://milenioapi.jmarzin.fr';
 const LOGIN = {username: 'admin', password: '51julie2'};
 
 function photoUpload(data, destination) {
@@ -73,6 +73,7 @@ function litAccueil() {
 }
 
 function contact(donnees) {
+    donnees.creneau = new Date(donnees.creneau).toLocaleString();
     return axios({
         method: 'post',
         url: `${BASE_URL}/accueil/message`,
@@ -87,9 +88,14 @@ function litRealisations(routeName) {
         .then(res => res.data)
 }
 
+function litActualites() {
+    return axios.get(`${BASE_URL}/a_propos`)
+        .then(res => res.data)
+}
+
 function toHttp(rep, photos) {
     return BASE_URL + '/' + rep + '/' + photos[0].image
 }
 
 export { photoUpload, getCarouselAccueil, postCarouselAccueil, getPanneauxAccueil, getContactAccueil, litAccueil, contact,
-litRealisations, toHttp}
+litRealisations, litActualites, toHttp}

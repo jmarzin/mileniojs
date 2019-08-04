@@ -36,8 +36,12 @@
             element: function() {
                 if(this.ensemble === 'Réalisations') {
                     return 'realisation'
-                } else {
+                } else if(this.ensemble === 'Cuisines') {
                     return 'cuisine'
+                } else if(this.ensemble === 'Rangements') {
+                    return 'rangement'
+                } else {
+                    return 'salle_de_bain'
                 }
             }
         }
