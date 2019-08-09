@@ -5,11 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-      admin: false
+      admin: ""
   },
   mutations: {
-    change(state) {
-      state.admin = true
+    change(state, p) {
+      state.admin = p
     }
   }
   ,

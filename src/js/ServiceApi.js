@@ -1,10 +1,10 @@
 import * as axios from 'axios';
 import {urlGoogleMail} from './urlGoogleMail';
 
-const BASE_URL = 'http://milenioapi.jmarzin.fr';
-const LOGIN = {username: 'admin', password: '51julie2'};
+const BASE_URL = 'http://localhost:8000';
+const LOGIN = {username: 'utilisateur', password: 'message'};
 
-function photoUpload(data, destination) {
+function photoUpload(data, destination, password) {
     const formData = new FormData();
     formData.append(data.name, data.files[0], data.files[0].name);
     formData.append('destination', destination);
@@ -12,7 +12,7 @@ function photoUpload(data, destination) {
         method: 'post',
         url: BASE_URL + '/photoupload',
         data: formData,
-        auth: LOGIN
+        auth: { username: 'admin', password: password }
     })
         .then(x => BASE_URL + x.data.name)
 }
@@ -22,13 +22,13 @@ function getCarouselAccueil() {
         .then(res => res.data.map(e => Object.assign({}, e, {photo: `${BASE_URL}/${e.photo}`})))
 }
 
-function postCarouselAccueil(list, menage) {
+function postCarouselAccueil(list, menage, password) {
     const newList = list.map(e => Object.assign({}, e, {photo: e.photo.replace(`${BASE_URL}/`, '')}));
     return axios({
         method: 'post',
         url: `${BASE_URL}/accueil/carousel`,
         data: { liste: newList, menage: menage },
-        auth: LOGIN
+        auth: { username: 'admin', password: password }
     })
 
 }
@@ -98,4 +98,4 @@ function toHttp(rep, photos) {
 }
 
 export { photoUpload, getCarouselAccueil, postCarouselAccueil, getPanneauxAccueil, getContactAccueil, litAccueil, contact,
-litRealisations, litActualites, toHttp}
+litRealisations, litActualites, toHttp, BASE_URL}

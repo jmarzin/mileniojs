@@ -9,7 +9,7 @@
                 <b-collapse is-nav id="nav_collapse">
 
                     <b-navbar-nav class="ml-auto">
-                        <b-nav-item to="/">Accueil</b-nav-item>
+                        <b-nav-item to="/" :class="{ active: $route.path === '/' }">Accueil</b-nav-item>
                         <b-nav-item to="/actualites" v-bind:class="{ active: $route.path.indexOf('actualites') > 0 }">Actualités</b-nav-item>
                         <b-nav-item-dropdown v-bind:class="{ active: $route.path.indexOf('cuisines') > 0 || $route.path.indexOf('salles_de_bain') > 0 || $route.path.indexOf('rangements') > 0 }" text="Services" right>
                             <b-dropdown-item to='/cuisines' v-bind:class="{ active: $route.path.indexOf('cuisines') > 0 }">Cuisines</b-dropdown-item>

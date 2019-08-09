@@ -110,7 +110,7 @@
                 this.indexCourant = this.list.length - 1;
             },
             onChangePhoto(event) {
-                photoUpload(event.target, 'carousel_accueil')
+                photoUpload(event.target, 'carousel_accueil', this.password)
                     .then((res) => {
                         this.list[this.indexCourant].photo = res;
                         this.networkError = null;
@@ -126,7 +126,7 @@
                     newList = newList.concat(this.list2.map(e => {
                         e.affiche=false;
                         return e;}))}
-                postCarouselAccueil(newList, this.menage)
+                postCarouselAccueil(newList, this.menage, this.password)
                     .then(() => {
                         this.$emit('maj', newList)
                     })
@@ -148,6 +148,9 @@
                     ghostClass: "ghost",
                     draggable:'.list-group-item'
                 };
+            },
+            password() {
+                return this.$store.state.admin
             }
         },
         mounted() {

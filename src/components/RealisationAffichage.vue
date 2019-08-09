@@ -6,7 +6,7 @@
                             indicators
                             :interval="3000">
                     <div v-for="(photo, index) in carousel" :key="index">
-                        <b-carousel-slide :img-src="adresse(donneesRealisation.repertoire, [photo])">
+                        <b-carousel-slide :img-src="getAdress(donneesRealisation.repertoire, [photo])">
                         </b-carousel-slide>
                     </div>
                 </b-carousel>
@@ -35,6 +35,9 @@
         name: "realisationaffichage",
         props: ['donneesRealisations', 'index'],
         methods: {
+            getAdress: function(repertoire, photos) {
+                return toHttp(repertoire, photos)
+            },
             adresse: function (repertoire) {
                 for( var i = 0 ; i < this.donneesRealisations.length ; i++) {
                     if(this.donneesRealisations[i].repertoire === repertoire) {
