@@ -60,7 +60,7 @@
         border-bottom: 1px solid #eee;
     }
     .panneau {
-        padding: 0px;
+        padding: 0;
         font-size: 14px;
         height: 120px;
         overflow-y: hidden;

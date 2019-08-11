@@ -103,7 +103,7 @@
                 this.decIndex();
             },
             addImage() {
-                for (var i = 0; i < this.list.length ; i++) {
+                for (let i = 0; i < this.list.length ; i++) {
                     if(this.list[i].caption === "" && this.list[i].photo === "") return;
                 }
                 this.list.push({caption: '', photo: '', affiche: true});
@@ -119,7 +119,7 @@
                 })
             },
             validation() {
-                var newList = this.list.map(e => {
+                let newList = this.list.map(e => {
                     e.affiche=true;
                     return e});
                 if(!this.menage) {

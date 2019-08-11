@@ -20,7 +20,7 @@
         ,
         computed: {
             tranche: function () {
-                var list = this.donneesRealisations;
+                let list = this.donneesRealisations;
                 return list.slice((this.currentPage - 1) * this.nbpp, Math.min(list.length,
                     this.currentPage * this.nbpp))
             },

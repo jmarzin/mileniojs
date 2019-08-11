@@ -77,7 +77,7 @@
                         <label class="form__label">Message:</label>
                         <span class="error" v-if="!$v.contact.message.required"> obligatoire</span>
                         <br>
-                        <textarea rows="10" cols = "100" maxlength="999" class="form__input" v-model.trim="$v.contact.message.$model" :class="status($v.contact.message)" name="message"/>
+                        <b-form-textarea rows="5" max-rows="10" class="form__input" v-model.trim="$v.contact.message.$model" :class="status($v.contact.message)" name="message"></b-form-textarea>
                     </div>
 
                     <div class="form-group" :class="{ 'form-group--error': $v.contact.$error }"></div>
@@ -92,7 +92,8 @@
 </template>
 
 <script>
-    import {isAfter, addDays, addHours, areRangesOverlapping} from 'date-fns';
+    import {endOfHour, addMilliseconds, addMinutes, addHours, addDays, addMonths, areRangesOverlapping,
+            getDay, startOfDay, startOfHour, setHours, isWithinRange, isBefore} from 'date-fns';
     import { required, email, numeric, minLength, maxLength, requiredUnless } from 'vuelidate/lib/validators'
     import { contact } from '@/js/ServiceApi';
     export default {
@@ -152,40 +153,43 @@
         },
         computed: {
             libres() {
-                let localBusy = new Array(this.donneesContact.busy);
-                let debut = new Date(Date.now());
-                debut.setHours(debut.getHours() + 2);
-                debut.setMinutes(0);
-                debut.setSeconds(0);
-                let fin = new Date(debut);
-                fin.setMonth(fin.getMonth()+ 2);
-                const jours = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
-                const creneaux = [];
-                var jour = debut.getDay();
-                var enCours = new Date(debut);
-                var continuer = true;
-                var avant = new Date(debut);
-                avant.setHours(0);
-                var occupeeEnCours = {start: avant.toISOString(), end: debut.toISOString()};
-                while(continuer) {
-                    if(this.donneesContact.plages[jours[jour]].length > 0) {
-                        let plageJour = this.donneesContact.plages[jours[jour]];
-                        for(var ip = 0 ; ip < plageJour.length ; ip++) {
-                            let seq = plageJour[ip];
-                            for(var h = seq.debut ; h < seq.fin ; h++) {
-                                enCours.setHours(h);
-                                if(isAfter(enCours, fin)) { continuer = false; break; }
-                                if(!occupeeEnCours || !areRangesOverlapping(enCours, addHours(enCours, 1), occupeeEnCours.start, occupeeEnCours.end)) {
-                                    creneaux.push(new Date(enCours));
-                                }
-                                while(occupeeEnCours && isAfter(addHours(enCours, 1), occupeeEnCours.end)) {
-                                    occupeeEnCours = localBusy.shift();
-                                }
+                function premiere_plage_disponible(heure_au_plus_tot, ouvertures, duree) {
+                    const jours = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+                    let jour = getDay(heure_au_plus_tot);
+                    for (let j = 0; j < 8; j++) {
+                        let plages_du_jour = ouvertures[jours[(jour + j) % 7]];
+                        for (let i = 0; i < plages_du_jour.length; i++) {
+                            let debut_plage = startOfHour(setHours(heure_au_plus_tot , plages_du_jour[i].debut));
+                            if (isBefore(heure_au_plus_tot, debut_plage)) {
+                                return {start: debut_plage, end: addMinutes(debut_plage, duree)}
+                            }
+                            let fin_plage = startOfHour(setHours(heure_au_plus_tot, plages_du_jour[i].fin));
+                            if (isWithinRange(heure_au_plus_tot, debut_plage, fin_plage) && isWithinRange(addMinutes(heure_au_plus_tot, 90), debut_plage, fin_plage)) {
+                                return {start: heure_au_plus_tot, end: addMinutes(heure_au_plus_tot, duree)};
                             }
                         }
+                        heure_au_plus_tot = startOfDay(addDays(heure_au_plus_tot, 1));
                     }
-                    jour = jour === 6 ? 0 : jour + 1;
-                    enCours = addDays(enCours, 1);
+                    return {}
+                }
+
+                const ouvertures = this.donneesContact.plages;
+                const duree_rdv = this.donneesContact.duree_rdv;
+                let plages_occupees = this.donneesContact.busy;
+                let  heure_au_plus_tot = new Date(Date.now());
+                heure_au_plus_tot = addHours(addMilliseconds(endOfHour(heure_au_plus_tot), 1), 2);
+                const heure_au_plus_tard = addMonths(heure_au_plus_tot, 2);
+                const creneaux = [];
+                while (isBefore(heure_au_plus_tot, heure_au_plus_tard)) {
+                    const plage_disponible = premiere_plage_disponible(heure_au_plus_tot, ouvertures, duree_rdv);
+                    const plage_occupee = plages_occupees.shift();
+                    if (plage_disponible === {}) break;
+                    if(plage_occupee && areRangesOverlapping(plage_occupee.start, plage_occupee.end, plage_disponible.start, plage_disponible.end)) {
+                        heure_au_plus_tot = plage_occupee.end;
+                    } else {
+                        creneaux.push(new Date(plage_disponible.start));
+                        heure_au_plus_tot = addMinutes(plage_disponible.start, 30);
+                    }
                 }
                 return creneaux;
             }

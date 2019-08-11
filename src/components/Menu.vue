@@ -1,13 +1,12 @@
 <template>
     <div id="menu">
-        <b-navbar toggleable="md" fixed="top" type="dark" variant="dark" class="py-1">
+        <b-navbar toggleable="md" fixed="top" type="dark" variant="dark">
             <div class="container">
                 <div class="navbar-header mx-auto">
                     <b-navbar-brand class="active" to="/">Milénioconcept</b-navbar-brand>
                     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
                 </div>
                 <b-collapse is-nav id="nav_collapse">
-
                     <b-navbar-nav class="ml-auto">
                         <b-nav-item to="/" :class="{ active: $route.path === '/' }">Accueil</b-nav-item>
                         <b-nav-item to="/actualites" v-bind:class="{ active: $route.path.indexOf('actualites') > 0 }">Actualités</b-nav-item>
@@ -31,13 +30,13 @@
         name: 'Menu',
         updated () {
             // From testing, without a brief timeout, it won't work.
-            if (this.$route.hash != "") {
+            if (this.$route.hash !== "") {
                 setTimeout(() => this.scrollTo(), TIMEOUT)
             }
         },
         methods: {
             scrollTo: function () {
-                if(this.$route.path != "/") {
+                if(this.$route.path !== "/") {
                     this.$router.push("/#contact")
                 } else {
                     setTimeout(() => { location.href = "#contact" }, TIMEOUT)
@@ -46,7 +45,3 @@
         }
     }
 </script>
-
-<style>
-
-</style>

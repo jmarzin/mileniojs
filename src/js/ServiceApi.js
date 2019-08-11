@@ -1,13 +1,14 @@
 import * as axios from 'axios';
 import {urlGoogleMail} from './urlGoogleMail';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'http://milenioapi.jmarzin.fr';
 const LOGIN = {username: 'utilisateur', password: 'message'};
 
 function photoUpload(data, destination, password) {
     const formData = new FormData();
     formData.append(data.name, data.files[0], data.files[0].name);
     formData.append('destination', destination);
+    // noinspection JSUnresolvedFunction
     return axios({
         method: 'post',
         url: BASE_URL + '/photoupload',
@@ -52,6 +53,7 @@ function getContactAccueil() {
         "\",\"timeMax\": \""
         + fin.toISOString() +
         "\"}");
+    console.log(json_request);
     let p2 = axios({
         method: 'post',
         url: urlGoogleMail,

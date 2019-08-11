@@ -39,7 +39,7 @@
                 return toHttp(repertoire, photos)
             },
             adresse: function (repertoire) {
-                for( var i = 0 ; i < this.donneesRealisations.length ; i++) {
+                for( let i = 0 ; i < this.donneesRealisations.length ; i++) {
                     if(this.donneesRealisations[i].repertoire === repertoire) {
                         return toHttp(repertoire, this.donneesRealisations[i].photos)
                     }
@@ -47,7 +47,7 @@
                 return '#'
             },
             lienVers: function (repertoire) {
-                for( var i = 0 ; i < this.donneesRealisations.length ; i++) {
+                for( let i = 0 ; i < this.donneesRealisations.length ; i++) {
                     if(this.donneesRealisations[i].repertoire === repertoire) {
                         return i
                     }
