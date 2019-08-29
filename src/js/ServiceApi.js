@@ -53,7 +53,6 @@ function getContactAccueil() {
         "\",\"timeMax\": \""
         + fin.toISOString() +
         "\"}");
-    console.log(json_request);
     let p2 = axios({
         method: 'post',
         url: urlGoogleMail,

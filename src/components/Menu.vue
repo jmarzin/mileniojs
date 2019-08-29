@@ -3,7 +3,7 @@
         <b-navbar toggleable="md" fixed="top" type="dark" variant="dark">
             <div class="container">
                 <div class="navbar-header mx-auto">
-                    <b-navbar-brand class="active" to="/">Milénioconcept</b-navbar-brand>
+                    <b-navbar-brand to="/">Milénioconcept</b-navbar-brand>
                     <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
                 </div>
                 <b-collapse is-nav id="nav_collapse">

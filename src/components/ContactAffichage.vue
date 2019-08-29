@@ -164,7 +164,7 @@
                                 return {start: debut_plage, end: addMinutes(debut_plage, duree)}
                             }
                             let fin_plage = startOfHour(setHours(heure_au_plus_tot, plages_du_jour[i].fin));
-                            if (isWithinRange(heure_au_plus_tot, debut_plage, fin_plage) && isWithinRange(addMinutes(heure_au_plus_tot, 90), debut_plage, fin_plage)) {
+                            if (isWithinRange(heure_au_plus_tot, debut_plage, fin_plage) && isWithinRange(addMinutes(heure_au_plus_tot, duree_rdv), debut_plage, fin_plage)) {
                                 return {start: heure_au_plus_tot, end: addMinutes(heure_au_plus_tot, duree)};
                             }
                         }
@@ -175,20 +175,24 @@
 
                 const ouvertures = this.donneesContact.plages;
                 const duree_rdv = this.donneesContact.duree_rdv;
+                const frequence_rdv = this.donneesContact.frequence_rdv;
                 let plages_occupees = this.donneesContact.busy;
                 let  heure_au_plus_tot = new Date(Date.now());
                 heure_au_plus_tot = addHours(addMilliseconds(endOfHour(heure_au_plus_tot), 1), 2);
                 const heure_au_plus_tard = addMonths(heure_au_plus_tot, 2);
                 const creneaux = [];
+                let plage_occupee = plages_occupees.shift();
                 while (isBefore(heure_au_plus_tot, heure_au_plus_tard)) {
                     const plage_disponible = premiere_plage_disponible(heure_au_plus_tot, ouvertures, duree_rdv);
-                    const plage_occupee = plages_occupees.shift();
                     if (plage_disponible === {}) break;
+                    while (plage_occupee != null && isBefore(plage_occupee.end, addMinutes(plage_disponible.start, 1))) {
+                        plage_occupee = plages_occupees.shift();
+                    }
                     if(plage_occupee && areRangesOverlapping(plage_occupee.start, plage_occupee.end, plage_disponible.start, plage_disponible.end)) {
                         heure_au_plus_tot = plage_occupee.end;
                     } else {
                         creneaux.push(new Date(plage_disponible.start));
-                        heure_au_plus_tot = addMinutes(plage_disponible.start, 30);
+                        heure_au_plus_tot = addMinutes(plage_disponible.start, frequence_rdv);
                     }
                 }
                 return creneaux;
