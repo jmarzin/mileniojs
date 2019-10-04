@@ -1,6 +1,6 @@
 <template>
-    <div id="contact">
-        <b-button v-if="admin" :variant="'link'" v-on:click="enterEditMode">
+    <div id="contact" :class="{ blue: !viewMode}">
+        <b-button v-if="admin && viewMode" :variant="'link'" v-on:click="enterEditMode">
             <font-awesome-icon icon="pen"></font-awesome-icon>
         </b-button>
         <contact-affichage v-if="viewMode" :donneesContact=copieDonneesContact></contact-affichage>

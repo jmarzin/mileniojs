@@ -9,11 +9,11 @@
                             :img-src="adresse(item.repertoire, item.photos)"
                             img-alt="Photo"
                             class="mb-2 img-responsive img-hover img-related pointer"
-                            @click="$router.push(`/${element}/${index}`)">
+                            @click="$router.push(`/${element}/${avant + index}`)">
                         <p class="card-text">
                             {{item.sous_titre}}
                         </p>
-                        <b-link to="`/${element}/${index}`"
+                        <b-link to="`/${element}/${avant + index}`"
                                 class="card-link">En savoir plus</b-link>
                     </b-card>
                 </b-card-group>
@@ -26,7 +26,7 @@
     import {toHttp} from '@/js/ServiceApi';
     export default {
         name: "realisationsaffichage",
-        props: ['donneesRealisations', 'ensemble'],
+        props: ['donneesRealisations', 'ensemble', 'avant'],
         methods: {
             adresse: function(rep, photos) {
                 return toHttp(rep, photos)
@@ -47,7 +47,7 @@
         }
     }
 </script>
-<style>
+<style scoped>
     .pointer {
         cursor: pointer;
     }

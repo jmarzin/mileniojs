@@ -24,11 +24,6 @@
 
 /* Global Styles */
 
-.panneau {
-  height: 120px;
-  overflow-y: hidden;
-}
-
 html,
 body {
   height: 100%;
@@ -59,5 +54,64 @@ header.carousel .fill {
 
 @media(max-width:767px) {
     margin-bottom: 15px;
+}
+
+.blue {
+  border-style: solid;
+  border-color: #007bff;
+}
+
+.flip-list-move {
+  transition: transform 0.5s;
+}
+
+.no-move {
+  transition: transform 0s;
+}
+
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
+
+.list-group {
+  min-height: 20px;
+  display: block;
+}
+
+.list-group-item {
+  cursor: move;
+}
+
+.list-group-item svg {
+  cursor: pointer;
+}
+
+input {
+  border: 1px solid silver;
+  border-radius: 4px;
+  background: white;
+  padding: 5px 10px;
+}
+
+.form__input {
+  border: 1px solid silver;
+  border-radius: 4px;
+  background: white;
+  padding: 5px 10px;
+}
+
+.dirty {
+  border-color: #5A5;
+  background: #EFE;
+}
+
+.dirty:focus {
+  outline-color: #8E8;
+}
+
+.error {
+  border-color: red;
+  color: red;
 }
 </style>

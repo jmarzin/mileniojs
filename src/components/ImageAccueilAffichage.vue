@@ -5,7 +5,7 @@
                     img-width="1024" v-model="slide"
                     @sliding-start="onSlideStart" @sliding-end="onSlideEnd">
             <div v-for="photo in carousel_accueil" :key="photo.photo">
-                <b-carousel-slide class="fill" caption-tag="h2" :caption="photo.caption" :style="{ backgroundImage: 'url(' + photo.photo +')' }">
+                <b-carousel-slide class="fill" caption-tag="h3" :caption="photo.caption" :style="{ backgroundImage: 'url(' + photo.photo +')' }">
                     <img
                             slot="img"
                             class="d-block img-fluid w-100"
@@ -56,8 +56,7 @@
     }
 </script>
 
-<style>
-
+<style scoped>
     .unique-caption {
         position: relative;
         top: 120px;

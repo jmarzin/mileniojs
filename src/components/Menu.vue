@@ -30,7 +30,7 @@
         name: 'Menu',
         updated () {
             // From testing, without a brief timeout, it won't work.
-            if (this.$route.hash !== "") {
+            if (this.$route.hash === "#contact") {
                 setTimeout(() => this.scrollTo(), TIMEOUT)
             }
         },

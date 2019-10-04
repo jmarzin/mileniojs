@@ -1,9 +1,9 @@
 <template>
-    <div id="image-accueil">
-        <b-button v-if="admin" :variant="'link'" v-on:click="enterEditMode">
+    <div id="image-accueil" :class="{ blue: !viewMode}">
+        <b-button v-if="admin && viewMode" :variant="'link'" v-on:click="enterEditMode">
             <font-awesome-icon icon="pen"></font-awesome-icon>
         </b-button>
-        <image-accueil-affichage v-if="viewMode" :donneesCarousel=donneesCarousel></image-accueil-affichage>
+        <image-accueil-affichage v-if="viewMode" :donneesCarousel=copieDonneesCarousel></image-accueil-affichage>
         <image-accueil-edition v-else :donneesCarousel=copieDonneesCarousel v-on:abandon="viewMode=true"
         v-on:maj="maj($event)"></image-accueil-edition>
     </div>

@@ -153,18 +153,30 @@
         },
         computed: {
             libres() {
+                function heure(heureOrigine, heureCreneau) {
+                    let h = 0;
+                    let m = 0;
+                    if (isNaN(heureCreneau)) {
+                        let p = heureCreneau.split('h');
+                        h = parseInt(p[0]);
+                        m = parseInt(p[1]);
+                    } else {
+                        h = heureCreneau;
+                    }
+                    return addMinutes(startOfHour(setHours(heureOrigine , h)), m);
+                }
                 function premiere_plage_disponible(heure_au_plus_tot, ouvertures, duree) {
                     const jours = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
                     let jour = getDay(heure_au_plus_tot);
                     for (let j = 0; j < 8; j++) {
                         let plages_du_jour = ouvertures[jours[(jour + j) % 7]];
                         for (let i = 0; i < plages_du_jour.length; i++) {
-                            let debut_plage = startOfHour(setHours(heure_au_plus_tot , plages_du_jour[i].debut));
+                            let debut_plage = heure(heure_au_plus_tot , plages_du_jour[i].debut);
                             if (isBefore(heure_au_plus_tot, debut_plage)) {
                                 return {start: debut_plage, end: addMinutes(debut_plage, duree)}
                             }
-                            let fin_plage = startOfHour(setHours(heure_au_plus_tot, plages_du_jour[i].fin));
-                            if (isWithinRange(heure_au_plus_tot, debut_plage, fin_plage) && isWithinRange(addMinutes(heure_au_plus_tot, duree_rdv), debut_plage, fin_plage)) {
+                            let fin_plage = heure(heure_au_plus_tot, plages_du_jour[i].fin);
+                            if (isWithinRange(heure_au_plus_tot, debut_plage, fin_plage) && isWithinRange(addMinutes(heure_au_plus_tot, duree), debut_plage, fin_plage)) {
                                 return {start: heure_au_plus_tot, end: addMinutes(heure_au_plus_tot, duree)};
                             }
                         }
@@ -201,38 +213,11 @@
     };
 </script>
 
-<style>
+<style scoped>
     section.contact {
         width: 100%;
         height: 100px;
         overflow-y: scroll;
         padding-left: 4px;
-    }
-    input {
-        border: 1px solid silver;
-        border-radius: 4px;
-        background: white;
-        padding: 5px 10px;
-    }
-
-    .form__input {
-        border: 1px solid silver;
-        border-radius: 4px;
-        background: white;
-        padding: 5px 10px;
-    }
-
-    .dirty {
-        border-color: #5A5;
-        background: #EFE;
-    }
-
-    .dirty:focus {
-        outline-color: #8E8;
-    }
-
-    .error {
-        border-color: red;
-        color: red;
     }
 </style>

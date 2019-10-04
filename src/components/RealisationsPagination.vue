@@ -1,6 +1,6 @@
 <template>
     <div id="realisations-pagination">
-        <RealisationsAffichage v-bind:donneesRealisations=tranche :ensemble="ensemble"></RealisationsAffichage>
+        <RealisationsAffichage v-bind:donneesRealisations=tranche :ensemble="ensemble" :avant="avant"></RealisationsAffichage>
         <b-pagination-nav v-if="donneesRealisations.length > nbpp" align="center" base-url="#" :number-of-pages=numberOfPages :value="currentPage"/>
     </div>
 </template>
@@ -23,6 +23,9 @@
                 let list = this.donneesRealisations;
                 return list.slice((this.currentPage - 1) * this.nbpp, Math.min(list.length,
                     this.currentPage * this.nbpp))
+            },
+            avant() {
+                return (this.currentPage - 1) * this.nbpp
             },
             currentPage: function () {
                 return Math.min(parseInt(this.$route.hash.substring(1)) || 1, this.numberOfPages)

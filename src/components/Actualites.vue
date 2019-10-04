@@ -5,7 +5,7 @@
                 <div class="col-lg-12">
                     <h1 class="page-header">Actualités</h1>
                     <b-breadcrumb :items="items"/>
-                    <b-button v-if="admin" :variant="'link'" v-on:click="enterEditMode">
+                    <b-button v-if="admin && viewMode" :variant="'link'" v-on:click="enterEditMode">
                         <font-awesome-icon icon="pen"></font-awesome-icon>
                     </b-button>
                     <b-alert v-if="erreurReseau" show variant="danger">{{erreurReseau}}</b-alert>

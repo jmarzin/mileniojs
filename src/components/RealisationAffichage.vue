@@ -1,7 +1,7 @@
 <template>
     <div id="realisation-affichage" v-if="ready">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <b-carousel controls
                             indicators
                             :interval="3000">
@@ -11,7 +11,7 @@
                     </div>
                 </b-carousel>
             </div>
-            <div class="col-md-4" v-html="donneesRealisation.texte"></div>
+            <div class="col-md-5" v-html="donneesRealisation.texte"></div>
         </div>
         <div class="row" v-if="donneesRealisation.repertoires_lies.length > 0">
             <div class="col-lg-12">

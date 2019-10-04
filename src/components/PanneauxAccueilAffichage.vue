@@ -12,7 +12,7 @@
                 <b-card>
                     <h6 slot="header">
                         <font-awesome-icon icon="check"></font-awesome-icon>
-                        {{donneesPanneaux.titre}}
+                        {{panneau.titre}}
                     </h6>
                     <b-card-body v-html="panneau.text" class="panneau"></b-card-body>
                 </b-card>
@@ -53,7 +53,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     .page-header {
         padding-bottom: 9px;
         margin: 40px 0 20px;

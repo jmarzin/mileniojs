@@ -1,6 +1,6 @@
 <template>
-    <div id="panneaux-accueil">
-        <b-button v-if="admin" :variant="'link'" v-on:click="enterEditMode">
+    <div id="panneaux-accueil" :class="{ blue: !viewMode}">
+        <b-button v-if="admin && viewMode" :variant="'link'" v-on:click="enterEditMode">
             <font-awesome-icon icon="pen"></font-awesome-icon>
         </b-button>
         <panneaux-accueil-affichage v-if="viewMode" :donneesPanneaux=copieDonneesPanneaux></panneaux-accueil-affichage>
@@ -32,6 +32,7 @@
             },
             maj(donnees) {
                 this.copieDonneesPanneaux = donnees;
+                this.viewMode = true;
             }
         },
         computed: {

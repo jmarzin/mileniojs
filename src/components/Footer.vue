@@ -1,7 +1,7 @@
 <template>
     <div id="footer" class="container">
         <footer>
-            <p>Copyright &copy; Milénio Concept 2016</p>
+            <p>Copyright &copy; Milénio Concept 2019</p>
         </footer>
     </div>
 </template>
@@ -12,9 +12,7 @@
     }
 </script>
 
-<style>
-    /* Footer Styles */
-
+<style scoped>
     footer {
         margin: 50px 0;
     }

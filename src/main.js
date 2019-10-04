@@ -19,7 +19,7 @@ library.add(faPlus, faMale, faArrowRight, faArrowUp, faArrowDown, faTrash, faPen
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-import Vuelidate from 'vuelidate'
+import Vuelidate from 'vuelidate';
 Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
@@ -27,5 +27,5 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  render: h => h(App)
+  "render": h => h(App)
 }).$mount('#app');
