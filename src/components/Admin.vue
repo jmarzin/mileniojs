@@ -22,7 +22,7 @@
         },
         mounted() {
             this.password = md5(this.$route.params.password);
-            if (this.password === "38b5188c3032225c37392ef863057344") {
+            if (this.password === "a27432775bc0921bbd182f111ad82304") {
                 this.$store.commit('change', this.$route.params.password);
             }
         }
