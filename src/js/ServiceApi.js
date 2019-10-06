@@ -2,7 +2,7 @@ import * as axios from 'axios';
 import {urlGoogleMail} from './urlGoogleMail';
 import store from './../store';
 
-const BASE_URL =  'http://milenioapi.jmarzin.fr';
+const BASE_URL =  'https://milenioapi.jmarzin.fr';
 const LOGIN = {username: 'utilisateur', password: 'message'};
 
 let TINYMCEINIT = {
