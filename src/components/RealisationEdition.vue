@@ -104,6 +104,9 @@
             <button class="btn btn-secondary" @click="$emit('abandon')">Abandon</button>
             <span>&nbsp;</span>
             <button :disabled="$v.item.invalid" class="btn btn-primary" @click="validation">Validation</button>
+            <div v-if="networkError">
+                {{networkError.message}}
+            </div>
         </div>
 </template>
 
